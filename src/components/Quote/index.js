@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import "./Quote.css";
+import PropTypes from "prop-types";
 
 export class Quote extends Component {
+  static propTypes = {
+    setLiked: PropTypes.func.isRequired,
+    quoteText: PropTypes.string.isRequired,
+    quoteAuthor: PropTypes.string.isRequired
+  };
+
   state = {
     userReaction: null,
     fontSize: 16,

@@ -1,6 +1,11 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 export class AddQuote extends Component {
+  static propTypes = {
+    addQuote: PropTypes.func.isRequired
+  };
+
   state = {
     _id: `${Math.floor(Math.random() * 100 + 1)}`,
     quoteAuthor: "You",

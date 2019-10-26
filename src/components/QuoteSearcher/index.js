@@ -58,6 +58,7 @@ export class QuoteSearcher extends Component {
     this.setState({
       ...this.state,
       fetching: true,
+      search: "",
       numLikes: 0,
       numDislikes: 0
     });
@@ -79,8 +80,6 @@ export class QuoteSearcher extends Component {
     // console.log(this.state.search);
     event.preventDefault();
     this.search(this.state.search);
-    // this.setState({ ...this.state, search: "" });
-    this.setState({ ...this.state, search: "" });
   };
 
   refresh = () => {
