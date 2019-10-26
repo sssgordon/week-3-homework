@@ -18,14 +18,31 @@ export class QuoteSearcher extends Component {
           ...this.state,
           fetching: false,
           error: false,
+          notFound: false,
           quotes: myJson,
           numLikes: 0,
           numDislikes: 0
         });
       })
+      .then(() => {
+        console.log(this.state.quotes);
+        console.log(this.state.fetching);
+        if (this.state.quotes.results.length === 0 && search) {
+          console.log("not found");
+          this.setState({
+            ...this.state,
+            notFound: true
+          });
+        }
+      })
       .catch(() => {
         console.log("error");
-        this.setState({ ...this.state, fetching: false, error: true });
+        this.setState({
+          ...this.state,
+          fetching: false,
+          error: true,
+          notFound: false
+        });
       });
   };
 
@@ -106,6 +123,24 @@ export class QuoteSearcher extends Component {
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
           <h1>Error</h1>
+        </div>
+      );
+    } else if (this.state.notFound) {
+      return (
+        <div>
+          <h1>Quotes</h1>
+          <form onSubmit={this.handleSubmit}>
+            <input
+              type="text"
+              value={this.state.search}
+              onChange={this.handleChange}
+            />
+            <button type="submit">Search!</button>
+          </form>
+          <h3>
+            Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
+          </h3>
+          <p>No search results. Please try again!</p>
         </div>
       );
     } else {
