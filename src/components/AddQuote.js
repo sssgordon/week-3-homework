@@ -2,18 +2,18 @@ import React, { Component } from "react";
 
 export class AddQuote extends Component {
   state = {
-    author: "You",
-    quote: ""
+    _id: `${Math.floor(Math.random() * 100 + 1)}`,
+    quoteAuthor: "You",
+    quoteText: ""
   };
 
   handleChange = event => {
-    this.setState({ ...this.state, quote: event.target.value });
+    this.setState({ ...this.state, quoteText: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.addQuote(this.state.quote);
-    this.setState({ ...this.state, quote: "" });
+    this.props.addQuote(this.state);
   };
 
   render() {

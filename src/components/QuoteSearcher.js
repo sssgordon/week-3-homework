@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Quote from "./Quote";
+import AddQuote from "./AddQuote";
+import "./QuoteSearch.css";
 
 export class QuoteSearcher extends Component {
   state = {
@@ -13,22 +15,19 @@ export class QuoteSearcher extends Component {
     fetch(`https://quote-garden.herokuapp.com/quotes/search/${search}`)
       .then(response => response.json())
       .then(myJson => {
-        console.log("fetched");
+        // console.log("fetched");
         this.setState({
           ...this.state,
           fetching: false,
           error: false,
           notFound: false,
-          quotes: myJson,
-          numLikes: 0,
-          numDislikes: 0
+          quotes: myJson
         });
       })
       .then(() => {
         console.log(this.state.quotes);
-        console.log(this.state.fetching);
         if (this.state.quotes.results.length === 0 && search) {
-          console.log("not found");
+          // console.log("not found");
           this.setState({
             ...this.state,
             notFound: true
@@ -36,7 +35,7 @@ export class QuoteSearcher extends Component {
         }
       })
       .catch(() => {
-        console.log("error");
+        // console.log("error");
         this.setState({
           ...this.state,
           fetching: false,
@@ -44,6 +43,13 @@ export class QuoteSearcher extends Component {
           notFound: false
         });
       });
+  };
+
+  addQuote = quote => {
+    this.setState({
+      ...this.state,
+      quotes: { results: [quote, ...this.state.quotes.results] }
+    });
   };
 
   setLiked = liked => {
@@ -55,12 +61,12 @@ export class QuoteSearcher extends Component {
   };
 
   handleChange = event => {
-    console.log(this.state.search);
+    // console.log(this.state.search);
     this.setState({ ...this.state, search: event.target.value });
   };
 
   handleSubmit = event => {
-    console.log(this.state.search);
+    // console.log(this.state.search);
     event.preventDefault();
     this.search(this.state.search);
     // this.setState({ ...this.state, search: "" });
@@ -68,7 +74,12 @@ export class QuoteSearcher extends Component {
 
   search = search => {
     this.componentDidMount(search);
-    this.setState({ ...this.state, fetching: true });
+    this.setState({
+      ...this.state,
+      fetching: true,
+      numLikes: 0,
+      numDislikes: 0
+    });
   };
 
   render() {
@@ -84,6 +95,7 @@ export class QuoteSearcher extends Component {
             />
             <button type="submit">Search!</button>
           </form>
+          <AddQuote addQuote={this.addQuote} />
           <h3>
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
@@ -101,6 +113,7 @@ export class QuoteSearcher extends Component {
             />
             <button type="submit">Search!</button>
           </form>
+          <AddQuote addQuote={this.addQuote} />
           <h3>
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
@@ -119,6 +132,7 @@ export class QuoteSearcher extends Component {
             />
             <button type="submit">Search!</button>
           </form>
+          <AddQuote addQuote={this.addQuote} />
           <h3>
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
@@ -137,6 +151,7 @@ export class QuoteSearcher extends Component {
             />
             <button type="submit">Search!</button>
           </form>
+          <AddQuote addQuote={this.addQuote} />
           <h3>
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
@@ -155,6 +170,7 @@ export class QuoteSearcher extends Component {
             />
             <button type="submit">Search!</button>
           </form>
+          <AddQuote addQuote={this.addQuote} />
           <h3>
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>

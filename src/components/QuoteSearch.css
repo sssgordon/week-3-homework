@@ -1,0 +1,11 @@
+form {
+  margin: 10px;
+}
+
+form input {
+  width: 200px;
+}
+
+form button {
+  width: 100px;
+}
