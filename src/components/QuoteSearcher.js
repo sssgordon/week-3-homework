@@ -13,17 +13,20 @@ export class QuoteSearcher extends Component {
     fetch(`https://quote-garden.herokuapp.com/quotes/search/${search}`)
       .then(response => response.json())
       .then(myJson => {
+        console.log("fetched");
         this.setState({
           ...this.state,
           fetching: false,
+          error: false,
           quotes: myJson,
           numLikes: 0,
           numDislikes: 0
         });
       })
-      .catch(() =>
-        this.setState({ ...this.state, fetching: false, error: true })
-      );
+      .catch(() => {
+        console.log("error");
+        this.setState({ ...this.state, fetching: false, error: true });
+      });
   };
 
   setLiked = liked => {
@@ -35,10 +38,12 @@ export class QuoteSearcher extends Component {
   };
 
   handleChange = event => {
+    console.log(this.state.search);
     this.setState({ ...this.state, search: event.target.value });
   };
 
   handleSubmit = event => {
+    console.log(this.state.search);
     event.preventDefault();
     this.search(this.state.search);
     // this.setState({ ...this.state, search: "" });
