@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Quote from "./Quote";
-import AddQuote from "./AddQuote";
-import "./QuoteSearch.css";
+import Quote from "../Quote";
+import AddQuote from "../AddQuote";
+import "./QuoteSearcher.css";
 
 export class QuoteSearcher extends Component {
   state = {
@@ -80,6 +80,7 @@ export class QuoteSearcher extends Component {
     event.preventDefault();
     this.search(this.state.search);
     // this.setState({ ...this.state, search: "" });
+    this.setState({ ...this.state, search: "" });
   };
 
   refresh = () => {
@@ -141,7 +142,7 @@ export class QuoteSearcher extends Component {
           <h3>
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
-          <h1>Error</h1>
+          <h2>Error</h2>
           <p id="return" onClick={this.refresh}>
             Try again!
           </p>
@@ -163,7 +164,10 @@ export class QuoteSearcher extends Component {
           <h3>
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
-          <p>No search results. Please try again!</p>
+          <h2>No search results.</h2>
+          <p id="return" onClick={this.refresh}>
+            Try again!
+          </p>
         </div>
       );
     } else {

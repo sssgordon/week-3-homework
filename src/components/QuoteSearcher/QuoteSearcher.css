@@ -10,6 +10,10 @@ form button {
   width: 100px;
 }
 
+#return {
+  display: inline;
+}
+
 #return:hover {
   text-decoration: underline;
   cursor: pointer;

@@ -14,6 +14,7 @@ export class AddQuote extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.addQuote(this.state);
+    this.setState({ ...this.state, quoteText: "" });
   };
 
   render() {
@@ -22,7 +23,7 @@ export class AddQuote extends Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            value={this.state.quote}
+            value={this.state.quoteText}
             onChange={this.handleChange}
           />
           <button>Add wisdom!</button>
