@@ -45,19 +45,29 @@ export class QuoteSearcher extends Component {
       });
   };
 
-  addQuote = quote => {
-    this.setState({
-      ...this.state,
-      quotes: { results: [quote, ...this.state.quotes.results] }
-    });
-  };
-
   setLiked = liked => {
     if (liked) {
       this.setState({ ...this.state, numLikes: this.state.numLikes + 1 });
     } else {
       this.setState({ ...this.state, numDislikes: this.state.numDislikes + 1 });
     }
+  };
+
+  search = search => {
+    this.componentDidMount(search);
+    this.setState({
+      ...this.state,
+      fetching: true,
+      numLikes: 0,
+      numDislikes: 0
+    });
+  };
+
+  addQuote = quote => {
+    this.setState({
+      ...this.state,
+      quotes: { results: [quote, ...this.state.quotes.results] }
+    });
   };
 
   handleChange = event => {
@@ -72,14 +82,8 @@ export class QuoteSearcher extends Component {
     // this.setState({ ...this.state, search: "" });
   };
 
-  search = search => {
-    this.componentDidMount(search);
-    this.setState({
-      ...this.state,
-      fetching: true,
-      numLikes: 0,
-      numDislikes: 0
-    });
+  refresh = () => {
+    this.setState({ fetching: null, numLikes: 0, numDislikes: 0, search: "" });
   };
 
   render() {
@@ -137,6 +141,9 @@ export class QuoteSearcher extends Component {
             Liked: {this.state.numLikes} / Disliked: {this.state.numDislikes}
           </h3>
           <h1>Error</h1>
+          <p id="return" onClick={this.refresh}>
+            Try again
+          </p>
         </div>
       );
     } else if (this.state.notFound) {
