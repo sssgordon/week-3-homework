@@ -1,0 +1,13 @@
+.quote {
+  margin: 25px auto;
+  padding: 10px;
+  width: 70%;
+
+  border: solid lightgray 1px;
+}
+
+.quote h3,
+p {
+  margin: 8px;
+  padding: 0;
+}
