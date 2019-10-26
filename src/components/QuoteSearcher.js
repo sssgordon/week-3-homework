@@ -84,6 +84,7 @@ export class QuoteSearcher extends Component {
 
   refresh = () => {
     this.setState({ fetching: null, numLikes: 0, numDislikes: 0, search: "" });
+    this.componentDidMount();
   };
 
   render() {
@@ -142,7 +143,7 @@ export class QuoteSearcher extends Component {
           </h3>
           <h1>Error</h1>
           <p id="return" onClick={this.refresh}>
-            Try again
+            Try again!
           </p>
         </div>
       );
